@@ -1,6 +1,7 @@
 const buttons = document.getElementById("buttons");
 const slide = document.querySelectorAll(".slide");
-slide.forEach((e,i)=>{
+let intervalId = null;
+slide.forEach((e, i) => {
 
     let span = document.createElement("span");
     span.classList.add(`btns`);
@@ -12,6 +13,10 @@ const slider = document.querySelector(".slider");
 let counter = 0;
 btns.forEach(element => {
     element.addEventListener('click', function () {
+        if (intervalId != null) {
+            clearInterval(intervalId);
+            interval();
+        }
         counter = element.classList[1];
         resetAllButtons();
         slideimage(counter)
@@ -27,6 +32,10 @@ const slideimages = () => {
 }
 slideimages();
 function goPrev() {
+    if (intervalId != null) {
+        clearInterval(intervalId);
+        interval();
+    }
     resetAllButtons();
     if (counter > 0)
         counter = counter - 1;
@@ -38,6 +47,10 @@ function goPrev() {
 
 }
 function goNext() {
+    if (intervalId != null) {
+        clearInterval(intervalId);
+        interval();
+    }
     resetAllButtons();
     if (counter < slide.length - 1) {
         counter = counter + 1;
@@ -49,33 +62,36 @@ function goNext() {
 function slideimage(counter) {
     if (counter >= 0 && counter < slide.length) {
         slider.style.transform = `translateX(-${counter * 101}%)`;
-        document.body.style.backgroundImage = `url(${slide[counter].src})`;
-        btns[counter].style.backgroundColor = "yellow";
+        btns[counter].style.backgroundColor = "#a28089";
         btns[counter].style.scale = "200%";
         if (counter != 0) {
             btns[counter - 1].style.scale = "100%";
-            btns[counter - 1].style.backgroundColor = "white";
+            btns[counter - 1].style.backgroundColor = "#ffa8B6";
         }
-        else{
+        else {
             btns[slide.length - 1].style.scale = "100%";
-            btns[slide.length - 1].style.backgroundColor = "white";
+            btns[slide.length - 1].style.backgroundColor = "#ffa8B6";
         }
     }
 }
 
-function resetAllButtons(){
+function resetAllButtons() {
     btns.forEach((element, index) => {
         if (index >= 0) {
             element.style.scale = "100%";
-            element.style.backgroundColor = "white";
+            element.style.backgroundColor = "#ffa8B6";
         }
     })
 }
 slideimage(counter)
-setInterval(function () {
-    counter++;
-    slideimage(counter);
-    if (counter == slide.length - 1 || counter == slide.length) {
-        counter = -1;
-    }
-}, 5000)
+function interval() {
+    let i = 5;
+    intervalId = setInterval(function () {
+        counter++;
+        slideimage(counter);
+        if (counter == slide.length - 1 || counter == slide.length) {
+            counter = -1;
+        }
+    }, 5000)
+}
+window.onload = interval();

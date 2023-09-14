@@ -62,7 +62,7 @@ body{
 }
 
 #buttons .btns{
-    background: white;
+    background: #ffa8B6;
     cursor: pointer;
     display: inline-block;
     width: 7px;
@@ -86,7 +86,7 @@ body{
     top: 50%;
     transform: translateY(-50%);
     font-size: 2em;
-    color: white;
+    color: black;
     z-index: 1;
     cursor: pointer;
 }
