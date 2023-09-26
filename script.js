@@ -35,14 +35,13 @@ slideimages();
 function goPrev() {
     if (intervalId != null) {
         clearInterval(intervalId);
-        // interval();
+        interval();
     }
     resetAllButtons();
     if (counter > 0)
         counter = counter - 1;
     else if (counter == 0) {
         counter = slide.length - 1;
-        // slider.style.transition = "transform 10 ease;"
     }
     slideimage(counter);
 
@@ -50,7 +49,7 @@ function goPrev() {
 function goNext() {
     if (intervalId != null) {
         clearInterval(intervalId);
-        // interval();
+        interval();
     }
     resetAllButtons();
     if (counter < slide.length - 1) {
