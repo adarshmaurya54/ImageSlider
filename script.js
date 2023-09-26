@@ -8,6 +8,7 @@ slide.forEach((e, i) => {
     span.classList.add(`${i}`);
     buttons.appendChild(span);
 })
+
 const btns = document.querySelectorAll(".btns");
 const slider = document.querySelector(".slider");
 let counter = 0;
@@ -34,7 +35,7 @@ slideimages();
 function goPrev() {
     if (intervalId != null) {
         clearInterval(intervalId);
-        interval();
+        // interval();
     }
     resetAllButtons();
     if (counter > 0)
@@ -49,7 +50,7 @@ function goPrev() {
 function goNext() {
     if (intervalId != null) {
         clearInterval(intervalId);
-        interval();
+        // interval();
     }
     resetAllButtons();
     if (counter < slide.length - 1) {
@@ -62,15 +63,16 @@ function goNext() {
 function slideimage(counter) {
     if (counter >= 0 && counter < slide.length) {
         slider.style.transform = `translateX(-${counter * 101}%)`;
-        btns[counter].style.backgroundColor = "#a28089";
+        document.body.style.backgroundImage = `url(${slide[counter].src})`;
+        btns[counter].style.backgroundColor = "#fff";
         btns[counter].style.scale = "200%";
         if (counter != 0) {
             btns[counter - 1].style.scale = "100%";
-            btns[counter - 1].style.backgroundColor = "#ffa8B6";
+            btns[counter - 1].style.backgroundColor = "#fff";
         }
         else {
             btns[slide.length - 1].style.scale = "100%";
-            btns[slide.length - 1].style.backgroundColor = "#ffa8B6";
+            btns[slide.length - 1].style.backgroundColor = "#fff";
         }
     }
 }
@@ -79,7 +81,7 @@ function resetAllButtons() {
     btns.forEach((element, index) => {
         if (index >= 0) {
             element.style.scale = "100%";
-            element.style.backgroundColor = "#ffa8B6";
+            element.style.backgroundColor = "#fff";
         }
     })
 }

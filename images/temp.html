@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Image Drag and Hover</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .image-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        #draggable-image {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-container">
+        <img id="draggable-image" src="./1.jpg" alt="Draggable Image">
+    </div>
+    <script>
+        let isDragging = false;
+        let initialX, initialY;
+
+        const draggableImage = document.getElementById('draggable-image');
+
+        draggableImage.addEventListener('mouseover', () => {
+            draggableImage.style.cursor = 'grab';
+        });
+
+        draggableImage.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            initialX = e.clientX - draggableImage.getBoundingClientRect().left;
+            initialY = e.clientY - draggableImage.getBoundingClientRect().top;
+            draggableImage.style.cursor = 'grabbing';
+            draggableImage.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const xOffset = e.clientX - initialX;
+            const yOffset = e.clientY - initialY;
+
+            draggableImage.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            draggableImage.style.cursor = 'grab';
+            draggableImage.style.userSelect = 'auto';
+        });
+
+    </script>
+</body>
+
+</html>
